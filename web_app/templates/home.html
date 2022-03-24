@@ -1,0 +1,103 @@
+<!-- Home page which extends base.html -->
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Search For TV Shows</h1>
+<body scroll="yes">
+<!-- form with post method as it sends information to backend -->
+<form method="POST">
+  
+  <input
+      type="text"
+      class="form-control"
+      id="keyword"
+      name="keyword"
+      placeholder="Search Based on keywords"
+  />
+  <br>
+ <!-- for printing and deleting the search result -->
+        <ul class="list-group list-group-flush" id="shows">
+         
+          {% for show in user.shows %}
+          <li class="list-group-item">
+            <!-- accessing db for printing search results -->
+            {{ show.data }}
+            <!-- for deleting search results -->
+            <a href = "/delete-show/{{show.id}}" class = "btn btn-outline-danger btn-sm">   Delete</a>
+          </li>
+          {% endfor %}
+        </ul>
+
+  <br>
+
+
+  <input
+  type="text"
+  class="form-control"
+  id="cast"
+  name="cast"
+  placeholder="Search cast for a show based on show id"
+  />
+  <br>
+<!-- for printing and deleting the search result -->
+        <ul class="list-group list-group-flush" id="casts">
+          {% for cast in user.casts %}
+          <li class="list-group-item">
+            {{ cast.data }}
+            <a href = "/delete-cast/{{cast.id}}" class = "btn btn-outline-danger btn-sm">Delete</a>
+          </li>
+          {% endfor %}
+        </ul>
+
+  <br>
+
+
+  <input
+  type="text"
+  class="form-control" 
+  id="crew"
+  name="crew"
+  placeholder="Search main crew for a show based on show id"
+  />
+  <br/>
+  <!-- for printing and deleting the search result -->
+        <ul class="list-group list-group-flush" id="crews">
+          {% for crew in user.crews %}
+          <li class="list-group-item">
+            {{ crew.data }}
+            <a href = "/delete-crew/{{crew.id}}" class = "btn btn-outline-danger btn-sm">Delete</a>
+          </li>
+          {% endfor %}
+        </ul>
+
+
+  <br>
+
+  <input
+  type="text"
+  class="form-control" 
+  id="date"
+  name="date"
+  placeholder="Search shows based on date(YYYY-MM-DD)"
+  />
+  <br/>
+  <!-- for printing and deleting the search result -->
+        <ul class="list-group list-group-flush" id="date">
+          <!-- accessing database for printing search result -->
+          {% for date in user.dates %}
+          <li class="list-group-item">
+            {{ date.data }}
+            <!-- deleting the results -->
+            <a href = "/delete-date/{{date.id}}" class = "btn btn-outline-danger btn-sm">Delete</a>
+          </li>
+          {% endfor %}
+        </ul>
+
+  <br>
+
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Enter</button>
+  </div>
+
+</form>
+</body>
+{% endblock %}
